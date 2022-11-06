@@ -15,11 +15,16 @@ function App() {
     console.log(event.target.email.value);
   }
 
+  // every keypress catch data
+  const handleEmailOnChange = (event) => {
+    console.log(event.target.value);
+  } 
+
 
   return (
     <div className="App">
-      <form  onSubmit={handleRegister}>
-        <input type="email" name="email" id="" placeholder='Your Email' />
+      <form onSubmit={handleRegister}>
+        <input onChange={handleEmailOnChange} type="email" name="email" id="" placeholder='Your Email' />
         <br />
         <input type="password" name="password" id="" placeholder='Your Password' />
         <br />
