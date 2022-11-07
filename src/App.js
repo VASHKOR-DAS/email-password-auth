@@ -32,14 +32,6 @@ function App() {
   return (
     <div className="">
       <RegisterReactBootstrap></RegisterReactBootstrap>
-
-      {/* <form onSubmit={handleRegister}>
-        <input onChange={handleEmailOnChange} type="email" name="email" id="" placeholder='Your Email' />
-        <br />
-        <input onBlur={handlePasswordOnBlur} type="password" name="password" id="" placeholder='Your Password' />
-        <br />
-        <button type="submit">Register</button>
-      </form> */}
     </div>
   );
 }
