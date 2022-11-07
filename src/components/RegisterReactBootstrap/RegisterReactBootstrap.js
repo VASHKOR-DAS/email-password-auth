@@ -2,6 +2,7 @@ import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { Link } from 'react-router-dom';
 import app from '../../firebase/firebase.init';
 
 const auth = getAuth(app);
@@ -23,7 +24,7 @@ const RegisterReactBootstrap = () => {
         const password = form.password.value;
         console.log(email, password);
 
-        
+
 
         // Regex
         if (!/(?=.*[A-Z].*[A-Z])/.test(password)) {
@@ -74,6 +75,8 @@ const RegisterReactBootstrap = () => {
 
     return (
         <div className='w-50 mx-auto'>
+            <h3 className='text-success text-center'>Please Register</h3>
+
             <Form onSubmit={handleRegister}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
@@ -89,11 +92,12 @@ const RegisterReactBootstrap = () => {
                 <p className='text-danger'>{passwordError}</p>
 
                 {/* if success true, show the text below */}
-                {success && <p className='text-success'>User Created Successfully</p> }
+                {success && <p className='text-success'>User Created Successfully</p>}
 
                 <Button variant="primary" type="submit">
                     Register
                 </Button>
+                <p><small>Already have an account? please <Link to='/login'>Log in</Link></small></p>
             </Form>
         </div>
     );
