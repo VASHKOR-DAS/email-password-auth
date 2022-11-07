@@ -11,6 +11,9 @@ const RegisterReactBootstrap = () => {
     // Regular Expression (Regex) check for password
     const [passwordError, setPasswordError] = useState('');
 
+    // if register success show success message, by default false
+    const [success, setSuccess] = useState(false);
+
     const handleRegister = event => {
 
         event.preventDefault()
@@ -19,6 +22,8 @@ const RegisterReactBootstrap = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
+
+        
 
         // Regex
         if (!/(?=.*[A-Z].*[A-Z])/.test(password)) {
@@ -49,12 +54,21 @@ const RegisterReactBootstrap = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+
+                // if create a user set it true
+                setSuccess(true);
+
+                // if created a user set input field reset
+                form.reset();
             })
             .catch(error => {
                 console.error('error', error);
 
                 // show error message
                 setPasswordError(error.message);
+
+                // when error, it should be hide
+                setSuccess(false);
             })
     }
 
@@ -73,6 +87,9 @@ const RegisterReactBootstrap = () => {
 
                 {/* show error text */}
                 <p className='text-danger'>{passwordError}</p>
+
+                {/* if success true, show the text below */}
+                {success && <p className='text-success'>User Created Successfully</p> }
 
                 <Button variant="primary" type="submit">
                     Register
