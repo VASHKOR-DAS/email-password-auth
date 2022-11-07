@@ -3,6 +3,9 @@ import './App.css';
 import { getAuth } from "firebase/auth";
 import app from './firebase/firebase.init';
 
+// React Bootstrap Component
+import RegisterReactBootstrap from './components/RegisterReactBootstrap/RegisterReactBootstrap';
+
 const auth = getAuth(app);
 
 function App() {
@@ -15,21 +18,28 @@ function App() {
     console.log(event.target.email.value);
   }
 
-  // every keypress catch data
+  // every keypress catch data onChange handler
   const handleEmailOnChange = (event) => {
     console.log(event.target.value);
-  } 
+  }
+
+  // catch data when focus change
+  const handlePasswordOnBlur = (event) => {
+    console.log(event.target.value);
+  }
 
 
   return (
-    <div className="App">
-      <form onSubmit={handleRegister}>
+    <div className="">
+      <RegisterReactBootstrap></RegisterReactBootstrap>
+
+      {/* <form onSubmit={handleRegister}>
         <input onChange={handleEmailOnChange} type="email" name="email" id="" placeholder='Your Email' />
         <br />
-        <input type="password" name="password" id="" placeholder='Your Password' />
+        <input onBlur={handlePasswordOnBlur} type="password" name="password" id="" placeholder='Your Password' />
         <br />
         <button type="submit">Register</button>
-      </form>
+      </form> */}
     </div>
   );
 }
