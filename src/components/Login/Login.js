@@ -1,5 +1,5 @@
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import React from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
@@ -8,7 +8,15 @@ import app from '../../firebase/firebase.init';
 const auth = getAuth(app);
 
 const Login = () => {
+
+    // if login success show success message, by default false
+    const [success, setSuccess] = useState(false);
+
+    const [passwordError, setPasswordError] = useState('');
+
     const handleSubmit = event => {
+        setPasswordError('');
+
         event.preventDefault();
 
         const form = event.target;
@@ -20,9 +28,13 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+
+                setSuccess(true);
             })
             .catch(error => {
                 console.error('error', error);
+                setSuccess(false);
+                setPasswordError(error.message);
             })
     }
     return (
@@ -39,9 +51,16 @@ const Login = () => {
                     <Form.Control name='password' type="password" placeholder="Password" required />
                 </Form.Group>
 
+                <p className='text-danger'>{passwordError}</p>
+
+                <p className='text-primary'>
+                    {success && <span>Successfully login</span>}</p>
+
                 <Button variant="primary" type="submit">
                     Login
                 </Button>
+
+
                 <p><small>New to this website? Please <Link to='/register'>Register</Link></small></p>
             </Form>
         </div>
