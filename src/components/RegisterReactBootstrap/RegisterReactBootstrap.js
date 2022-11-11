@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification } from 'firebase/auth';
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -17,7 +17,7 @@ const RegisterReactBootstrap = () => {
 
     const handleRegister = event => {
 
-        event.preventDefault()
+        event.preventDefault();
 
         const form = event.target;
         const email = form.email.value;
@@ -61,6 +61,9 @@ const RegisterReactBootstrap = () => {
 
                 // if created a user set input field reset
                 form.reset();
+
+                // verifyEmail
+                verifyEmail();
             })
             .catch(error => {
                 console.error('error', error);
@@ -71,6 +74,14 @@ const RegisterReactBootstrap = () => {
                 // when error, it should be hide
                 setSuccess(false);
             })
+
+        // verifyEmail Address
+        const verifyEmail = () => {
+            sendEmailVerification(auth.currentUser)
+                .then(() => {
+                    alert('Please check your email and verify.')
+                })
+        }
     }
 
     return (
