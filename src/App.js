@@ -55,7 +55,7 @@ function App() {
   */
 
   return (
-    <div className="">
+    <div className="container mt-4">
       <RouterProvider router={router}></RouterProvider>
     </div>
   );
